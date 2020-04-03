@@ -64,10 +64,7 @@ class UploadCleanup extends TimedJob {
 			$uploads = $userRoot->get('uploads');
 			/** @var Folder $uploadFolder */
 			$uploadFolder = $uploads->get($folder);
-		} catch (NotFoundException $e) {
-			$this->jobList->remove(self::class, $argument);
-			return;
-		} catch (NoUserException $e) {
+		} catch (NotFoundException|NoUserException $e) {
 			$this->jobList->remove(self::class, $argument);
 			return;
 		}
