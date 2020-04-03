@@ -27,6 +27,7 @@ declare(strict_types=1);
 
 namespace OCA\DAV\BackgroundJob;
 
+use OC\User\NoUserException;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
 use OCP\BackgroundJob\TimedJob;
@@ -64,6 +65,9 @@ class UploadCleanup extends TimedJob {
 			/** @var Folder $uploadFolder */
 			$uploadFolder = $uploads->get($folder);
 		} catch (NotFoundException $e) {
+			$this->jobList->remove(self::class, $argument);
+			return;
+		} catch (NoUserException $e) {
 			$this->jobList->remove(self::class, $argument);
 			return;
 		}
