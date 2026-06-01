@@ -98,7 +98,7 @@ jobs:
           submodules: true
 
       - name: Set up php ${{ matrix.php-versions }}
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2.37.0
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2.37.1
         timeout-minutes: 5
         with:
           php-version: ${{ matrix.php-versions }}
@@ -127,7 +127,7 @@ jobs:
 
       - name: Upload db code coverage
         if: ${{ !cancelled() && matrix.coverage }}
-        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
+        uses: codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354 # v6.0.1
         with:
           files: ./clover.db.xml
           flags: phpunit-postgres
